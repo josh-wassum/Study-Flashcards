@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void submitIsPressed(View v) {
-        // Set
+        // The Onclick event for the submit button, presently does nothing with the input
         TextView answer = findViewById(R.id.answer);
         String input = answer.getText().toString();
         if (isInputValid(input)) {
