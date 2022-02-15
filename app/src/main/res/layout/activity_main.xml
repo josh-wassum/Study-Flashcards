@@ -25,14 +25,14 @@
         android:ems="10"
         android:inputType="textShortMessage"
         android:minHeight="48dp"
-        android:text="sampleAnswer"
+        android:hint="Please Enter your Answer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit"
