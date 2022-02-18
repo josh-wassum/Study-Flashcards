@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PracticeActivity">
+
+    <TextView
+        android:id="@+id/practice_question"
+        android:layout_width="184dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="188dp"
+        android:text="Question"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/practice_answer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/practice_score"
+        android:layout_width="184dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="88dp"
+        android:text="# Total"
+        android:textSize="28dp"
+        app:layout_constraintBottom_toTopOf="@+id/practice_question"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/practice_topic"
+        android:layout_width="184dp"
+        android:layout_height="51dp"
+        android:text="Topic"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/practice_score"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/practice_answer"
+        android:layout_width="234dp"
+        android:layout_height="57dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="answer"
+        android:textSize="28dp"
+        tools:layout_editor_absoluteX="99dp"
+        tools:layout_editor_absoluteY="337dp" />
+
+    <Button
+        android:id="@+id/practice_submit_btn"
+        android:layout_width="175dp"
+        android:layout_height="63dp"
+        android:text="Submit"
+        android:textSize="25dp"
+        tools:layout_editor_absoluteX="114dp"
+        tools:layout_editor_absoluteY="439dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
