@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.flashcards.library.DataBaseHelper;
@@ -44,6 +45,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    // View controller code below!
+    // TODO: Figure out if this needs to be moved somewhere else
+    public boolean isInputValid(String input){
+        // Returns true or false based on set requirements
+
+        // Currently we are only checking for some kind of input (Could be simplified but we'll need to add more later)
+        if (input.length() > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public void submitIsPressed(View v) {
+        // The Onclick event for the submit button, presently does nothing with the input
+        TextView answer = findViewById(R.id.answer);
+        String input = answer.getText().toString();
+        if (isInputValid(input)) {
+            // If input is valid, slap a strange white box over the whole button!
+            v.setBackgroundColor(1);
+        }
     }
 
     //I presume these will be helpful for you guys:
