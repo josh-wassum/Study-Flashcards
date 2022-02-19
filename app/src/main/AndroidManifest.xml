@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Flashcards">
         <activity
+            android:name=".MasteryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QuizzesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PracticeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
