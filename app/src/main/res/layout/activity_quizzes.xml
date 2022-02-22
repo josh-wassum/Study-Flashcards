@@ -10,13 +10,15 @@
         android:id="@+id/quiz_answer"
         android:layout_width="245dp"
         android:layout_height="66dp"
+        android:layout_marginBottom="280dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Answer"
         android:textAlignment="center"
         android:textSize="25dp"
-        tools:layout_editor_absoluteX="83dp"
-        tools:layout_editor_absoluteY="363dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/quiz_submit_btn"
@@ -68,4 +70,15 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/quiz_topic" />
+
+    <Button
+        android:id="@+id/home_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:onClick="launchHome"
+        android:text="HOME (debug)"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

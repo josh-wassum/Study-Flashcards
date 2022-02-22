@@ -2,7 +2,9 @@ package com.example.flashcards;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 public class QuizzesActivity extends AppCompatActivity {
 
@@ -10,5 +12,12 @@ public class QuizzesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quizzes);
+    }
+
+    public void launchHome(View v){
+        // Returns to the home screen via a button
+
+        Intent i = new Intent(this, HomeActivity.class);
+        startActivity(i);
     }
 }

@@ -2,6 +2,7 @@ package com.example.flashcards;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +24,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+// Commenting out database code for testing, feel free to reenable if you need to use it!
+/*
 
 // Code used to get the output of the values in the database. This is only for testing.
         viewAll = findViewById(R.id.submit);
@@ -47,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+ */
+
     // View controller code below!
     // TODO: Figure out if this needs to be moved somewhere else
     public boolean isInputValid(String input){
@@ -66,8 +73,9 @@ public class MainActivity extends AppCompatActivity {
         TextView answer = findViewById(R.id.answer);
         String input = answer.getText().toString();
         if (isInputValid(input)) {
-            // If input is valid, slap a strange white box over the whole button!
-            v.setBackgroundColor(1);
+            // If input is valid, transfer to the home activity!
+            Intent i = new Intent(this, HomeActivity.class);
+            startActivity(i);
         }
     }
 
