@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".PracticeActivity">
 
+    <Button
+        android:id="@+id/home_button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:onClick="launchHome"
+        android:text="HOME (debug)"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/practice_question"
         android:layout_width="184dp"
@@ -47,20 +58,25 @@
         android:id="@+id/practice_answer"
         android:layout_width="234dp"
         android:layout_height="57dp"
+        android:layout_marginBottom="60dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="answer"
         android:textSize="28dp"
-        tools:layout_editor_absoluteX="99dp"
-        tools:layout_editor_absoluteY="337dp" />
+        app:layout_constraintBottom_toTopOf="@+id/practice_submit_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/practice_submit_btn"
         android:layout_width="175dp"
         android:layout_height="63dp"
+        android:layout_marginBottom="228dp"
         android:text="Submit"
         android:textSize="25dp"
-        tools:layout_editor_absoluteX="114dp"
-        tools:layout_editor_absoluteY="439dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
