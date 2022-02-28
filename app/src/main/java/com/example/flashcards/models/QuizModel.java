@@ -7,14 +7,12 @@ package com.example.flashcards.models;
 public class QuizModel {
 
     private int id;
-    private String Question;
-    private String Answer;
+    private QuestionModel questions;
     private boolean isQuizAttempted;
 
-    public QuizModel(int id, String question, String answer, boolean isQuizAttempted) {
+    public QuizModel(int id, QuestionModel questions, boolean isQuizAttempted) {
         this.id = id;
-        Question = question;
-        Answer = answer;
+        this.questions = questions;
         this.isQuizAttempted = isQuizAttempted;
     }
 
@@ -29,20 +27,12 @@ public class QuizModel {
         this.id = id;
     }
 
-    public String getQuestion() {
-        return Question;
+    public QuestionModel getQuestions() {
+        return questions;
     }
 
-    public void setQuestion(String question) {
-        Question = question;
-    }
-
-    public String getAnswer() {
-        return Answer;
-    }
-
-    public void setAnswer(String answer) {
-        Answer = answer;
+    public void setQuestions(QuestionModel questions) {
+        this.questions = questions;
     }
 
     public boolean isQuizAttempted() {
@@ -57,8 +47,7 @@ public class QuizModel {
     public String toString() {
         return "QuizModel{" +
                 "id=" + id +
-                ", Question='" + Question + '\'' +
-                ", Answer='" + Answer + '\'' +
+                ", questions=" + questions +
                 ", isQuizAttempted=" + isQuizAttempted +
                 '}';
     }

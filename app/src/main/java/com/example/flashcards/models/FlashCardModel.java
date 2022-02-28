@@ -6,28 +6,16 @@ package com.example.flashcards.models;
 
 public class FlashCardModel {
     private int id;
-    private String flashCardQuestion;
-    private String flashCardAnswer;
+    private QuestionModel questions;
     private boolean flashCardAttempted;
 
-    public FlashCardModel(int id, String flashCardQuestion, String flashCardAnswer, boolean flashCardAttempted) {
+    public FlashCardModel(int id, QuestionModel questions, boolean flashCardAttempted) {
         this.id = id;
-        this.flashCardQuestion = flashCardQuestion;
-        this.flashCardAnswer = flashCardAnswer;
+        this.questions = questions;
         this.flashCardAttempted = flashCardAttempted;
     }
 
     public FlashCardModel() {
-    }
-
-    @Override
-    public String toString() {
-        return "FlashCardModel{" +
-                "id=" + id +
-                ", flashCardQuestion='" + flashCardQuestion + '\'' +
-                ", flashCardAnswer='" + flashCardAnswer + '\'' +
-                ", flashCardAttempted=" + flashCardAttempted +
-                '}';
     }
 
     public int getId() {
@@ -38,20 +26,12 @@ public class FlashCardModel {
         this.id = id;
     }
 
-    public String getFlashCardQuestion() {
-        return flashCardQuestion;
+    public QuestionModel getQuestions() {
+        return questions;
     }
 
-    public void setFlashCardQuestion(String flashCardQuestion) {
-        this.flashCardQuestion = flashCardQuestion;
-    }
-
-    public String getFlashCardAnswer() {
-        return flashCardAnswer;
-    }
-
-    public void setFlashCardAnswer(String flashCardAnswer) {
-        this.flashCardAnswer = flashCardAnswer;
+    public void setQuestions(QuestionModel questions) {
+        this.questions = questions;
     }
 
     public boolean isFlashCardAttempted() {
@@ -60,5 +40,14 @@ public class FlashCardModel {
 
     public void setFlashCardAttempted(boolean flashCardAttempted) {
         this.flashCardAttempted = flashCardAttempted;
+    }
+
+    @Override
+    public String toString() {
+        return "FlashCardModel{" +
+                "id=" + id +
+                ", questions=" + questions +
+                ", flashCardAttempted=" + flashCardAttempted +
+                '}';
     }
 }
