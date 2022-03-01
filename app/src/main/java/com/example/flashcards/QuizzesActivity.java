@@ -28,8 +28,19 @@ public class QuizzesActivity extends AppCompatActivity {
         /******************************Testing for getAllQuizzes and getAllQuizWithTopic **************/
         String value = "AllFlashCard: ";
         dbHelper = new DataBaseHelper(this);
+        int question_no = 4;
+        QuizModel quizModel = new QuizModel();
+        quizzes = dbHelper.getAllQuizzesWithTopicNotAttempted("DIVISION");
 
-        quizzes = dbHelper.getAllQuizzes();
+        if(quizzes.size() >= question_no){
+            for(int i = 0;i<question_no;i++){
+                quizModel = quizzes.get(i);
+                Log.d("Question "+i, quizModel.getQuestions().getQuestion());
+            }
+        }else{
+            Log.d("Question ", "Congrats you have attempted all quizzes");
+        }
+
         for (QuizModel quiz : quizzes) {
             Log.d("Quiz Value", quiz.toString());
             value += quiz.toString();

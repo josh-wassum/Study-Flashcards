@@ -61,13 +61,30 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     private static final String[] topics = {"ADDITION", "SUBTRACTION", "MULTIPLICATION", "DIVISION"};
 
-    private static final QuestionModel[] questions = {new QuestionModel(0, "10 + 5", "15", "ADDITION"),
-                                                      new QuestionModel(0, "10 - 5", "5", "SUBTRACTION"),
-                                                      new QuestionModel(0, "10 * 5", "50", "MULTIPLICATION"),
-                                                      new QuestionModel(0, "10 / 5", "2", "DIVISION")};
-
-
     //Flash Card Questions and Answers.
+    private static final QuestionModel[] questions = {new QuestionModel(0, "10 + 5", "15", "ADDITION"),
+                                                      new QuestionModel(0, "18 + 8 + 12", "38", "ADDITION"),
+                                                      new QuestionModel(0, "12 + 6", "18", "ADDITION"),
+                                                      new QuestionModel(0, "14 + 7 + 21", "42", "ADDITION"),
+                                                      new QuestionModel(0, "14 + 7 + 21", "42", "ADDITION"),
+                                                      new QuestionModel(0, "(10 - 5)", "5", "SUBTRACTION"),
+                                                      new QuestionModel(0, "(19 - 23)", "-4", "SUBTRACTION"),
+                                                      new QuestionModel(0, "(53 - 25)", "28", "SUBTRACTION"),
+                                                      new QuestionModel(0, "(8 - 4 - 2)", "2", "SUBTRACTION"),
+                                                      new QuestionModel(0, "(83 - 50 - 23 - 6)", "4", "SUBTRACTION"),
+                                                      new QuestionModel(0, "8 * 2", "16", "MULTIPLICATION"),
+                                                      new QuestionModel(0, "7 * 7", "49", "MULTIPLICATION"),
+                                                      new QuestionModel(0, "5 * (6 + 4)", "50", "MULTIPLICATION"),
+                                                      new QuestionModel(0, "4 * 7 * 9", "252", "MULTIPLICATION"),
+                                                      new QuestionModel(0, "8 * (6 - 2)", "32", "MULTIPLICATION"),
+                                                      new QuestionModel(0, "15 / 3", "5", "DIVISION"),
+                                                      new QuestionModel(0, "42 / 6", "7", "DIVISION"),
+                                                      new QuestionModel(0, "50 / (2 + 3)", "10", "DIVISION"),
+                                                      new QuestionModel(0, "24 / ( 10 -4)", "4", "DIVISION"),
+                                                      new QuestionModel(0, "24 / 6 - 2", "2", "DIVISION")};
+
+
+
 
 
 
@@ -187,7 +204,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     //This function is to insert initial values of flashcards
     public void insertFlashCards(SQLiteDatabase db){
-        int questionIds[] = {1,2};       //Since we know what questionId will be, just inserting values manually.
+        int questionIds[] = {1,2,3,4,5,6,7,8,9,10};       //Since we know what questionId will be, just inserting values manually.
         try{
             for(int questionId: questionIds){
                 ContentValues contentValues = new ContentValues();
@@ -203,7 +220,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     //This function is to insert initial values of Quizzes
     public void insertQuizzes(SQLiteDatabase db){
         //db = this.getWritableDatabase();
-        int questionIds[] = {3,4};       //Since we know what questionId will be, just inserting values manually.
+        int questionIds[] = {11,12,13,14,15,16,17,18,19,20};       //Since we know what questionId will be, just inserting values manually.
         try{
             for(int questionId: questionIds){
                 ContentValues contentValues = new ContentValues();
@@ -339,6 +356,95 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return returnList;
     }
 
+    //Get all the flash cards Not Attempted.
+    public List<FlashCardModel> getAllFlashCardsNotAttempted(){
+        List<FlashCardModel> returnList = new ArrayList<>();
+        String query = "SELECT f." +FLASHCARDS_ID+ ", f." +COLUMN_isATTEMPTED+ ", q." +QUESTION_ID+ ", " +
+                "q." +COLUMN_QUESTION+ ", q." +COLUMN_ANSWER+ ", t." +COLUMN_TOPIC+ " FROM " +FLASHCARDS_TABLE+
+                " AS f JOIN " +QUESTIONS_TABLE+ " AS q ON f." +COLUMN_QUESTIONS_ID+ " = q." +QUESTION_ID+
+                " JOIN " +TOPICS_TABLE+ " as t ON q." +COLUMN_TOPICS_ID+ " = t." +TOPICS_ID+ " AND f."+COLUMN_isATTEMPTED+ " = 0 ";
+        SQLiteDatabase db = this.getReadableDatabase();
+        try {
+            Cursor cursor = db.rawQuery(query, null);
+
+            if (cursor.moveToFirst()) {
+                do {
+
+                    FlashCardModel flashCard = new FlashCardModel();
+                    QuestionModel question = new QuestionModel();
+                    flashCard.setId(cursor.getInt(0));
+                    flashCard.setFlashCardAttempted(cursor.getInt(1) == 1 ? true : false);
+                    question.setId(cursor.getInt(2));
+                    question.setQuestion(cursor.getString(3));
+                    question.setAnswer(cursor.getString(4));
+                    question.setTopic(cursor.getString(5));
+                    flashCard.setQuestions(question);
+                    returnList.add(flashCard);
+                } while (cursor.moveToNext());
+                Log.d("Display Flash Card", "FlashCard Table is fetched");
+            } else {
+                //If flashCard table is empty
+                Log.d("Display Flash Card", "FlashCard Table is empty");
+            }
+        }catch (Exception e){
+            Log.d("Display Flash Card", "Error : "+e.getMessage());
+        }finally {
+            db.close();
+        }
+        return returnList;
+    }
+
+    //Get all the flashCard NotAttempted with given Topic.
+    public List<FlashCardModel> getAllFlashCardsWithTopicNotAttempted(String topic){
+        List<FlashCardModel> returnList = new ArrayList<>();
+        boolean valid = false;
+        for(String tp: topics){
+            if(tp.equals(topic)){
+                valid = true;
+            }
+        }
+        if(valid) {
+            String query = "SELECT f." +FLASHCARDS_ID+ ", f." +COLUMN_isATTEMPTED+ ", q." +QUESTION_ID+ ", " +
+                    "q." +COLUMN_QUESTION+ ", q." +COLUMN_ANSWER+ " FROM " +FLASHCARDS_TABLE+
+                    " AS f JOIN " +QUESTIONS_TABLE+ " AS q ON f." +COLUMN_QUESTIONS_ID+ " = q." +QUESTION_ID+
+                    " AND q." +COLUMN_TOPICS_ID+ " = (SELECT " +TOPICS_ID+ " from " +TOPICS_TABLE+
+                    " where " +COLUMN_TOPIC+ " = \"" +topic+ "\") AND f." +COLUMN_isATTEMPTED+ " = 0";
+
+            Log.d("*String query*", query);
+            SQLiteDatabase db = this.getReadableDatabase();
+            try {
+                Cursor cursor = db.rawQuery(query, null);
+
+                if (cursor.moveToFirst()) {
+                    do {
+
+                        FlashCardModel flashCard = new FlashCardModel();
+                        QuestionModel question = new QuestionModel();
+                        flashCard.setId(cursor.getInt(0));
+                        flashCard.setFlashCardAttempted(cursor.getInt(1) == 1 ? true : false);
+                        question.setId(cursor.getInt(2));
+                        question.setQuestion(cursor.getString(3));
+                        question.setAnswer(cursor.getString(4));
+                        question.setTopic(topic);
+                        flashCard.setQuestions(question);
+                        returnList.add(flashCard);
+                    } while (cursor.moveToNext());
+                    Log.d("Display Flash Card", "FlashCard Table is fetched");
+                } else {
+                    //If flashCard table is empty
+                    Log.d("Display Flash Card", "FlashCard Table is empty");
+                }
+            }catch (Exception e){
+                Log.d("Display Flash Card", "Error while fetching details with topic : "+ e.getMessage());
+            }finally {
+                db.close();
+            }
+        }else{
+            Log.d("*Display FlashCard*", "There is no questions based on "+topic);
+        }
+        return returnList;
+    }
+
     //Get all the quizzes.
     public List<QuizModel> getAllQuizzes(){
         List<QuizModel> returnList = new ArrayList<>();
@@ -392,6 +498,94 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                     " AS quiz JOIN " + QUESTIONS_TABLE + " AS q ON quiz." + COLUMN_QUESTIONS_ID + " = q." + QUESTION_ID +
                     " AND q." +COLUMN_TOPICS_ID+ " = (SELECT " +TOPICS_ID+ " from " +TOPICS_TABLE+
                     " where " +COLUMN_TOPIC+ " = \"" +topic+ "\")";
+            Log.d("*String query*", query);
+            SQLiteDatabase db = this.getReadableDatabase();
+            try {
+                Cursor cursor = db.rawQuery(query, null);
+
+                if (cursor.moveToFirst()) {
+                    do {
+
+                        QuizModel quiz = new QuizModel();
+                        QuestionModel question = new QuestionModel();
+                        quiz.setId(cursor.getInt(0));
+                        quiz.setQuizAttempted(cursor.getInt(1) == 1 ? true : false);
+                        question.setId(cursor.getInt(2));
+                        question.setQuestion(cursor.getString(3));
+                        question.setAnswer(cursor.getString(4));
+                        question.setTopic(topic);
+                        quiz.setQuestions(question);
+                        returnList.add(quiz);
+                    } while (cursor.moveToNext());
+                    Log.d("Display Quizzes", "Quiz Table is fetched");
+                } else {
+                    //If flashCard table is empty
+                    Log.d("Display Quizzes", "Quiz Table is empty");
+                }
+            }catch (Exception e){
+                Log.d("Display Quizzes", "Error : "+e.getMessage());
+            }finally {
+                db.close();
+            }
+        }else{
+            Log.d("*Display FlashCard*", "There is no questions based on "+topic);
+        }
+        return returnList;
+    }
+
+    //Get all the quizzes NotAttempted.
+    public List<QuizModel> getAllQuizzesNotAttempted(){
+        List<QuizModel> returnList = new ArrayList<>();
+        String query = "SELECT quiz." +QUIZ_ID+ ", quiz." +COLUMN_isATTEMPTED+ ", q." +QUESTION_ID+ ", " +
+                "q." +COLUMN_QUESTION+ ", q." +COLUMN_ANSWER+ ", t." +COLUMN_TOPIC+ " FROM " +QUIZZES_TABLE+
+                " AS quiz JOIN " +QUESTIONS_TABLE+ " AS q ON quiz." +COLUMN_QUESTIONS_ID+ " = q." +QUESTION_ID+
+                " JOIN " +TOPICS_TABLE+ " as t ON q." +COLUMN_TOPICS_ID+ " = t." +TOPICS_ID+ " AND quiz."+COLUMN_isATTEMPTED+ " = 0 ";
+        SQLiteDatabase db = this.getReadableDatabase();
+        try {
+            Cursor cursor = db.rawQuery(query, null);
+
+            if (cursor.moveToFirst()) {
+                do {
+
+                    QuizModel quiz = new QuizModel();
+                    QuestionModel question = new QuestionModel();
+                    quiz.setId(cursor.getInt(0));
+                    quiz.setQuizAttempted(cursor.getInt(1) == 1 ? true : false);
+                    question.setId(cursor.getInt(2));
+                    question.setQuestion(cursor.getString(3));
+                    question.setAnswer(cursor.getString(4));
+                    question.setTopic(cursor.getString(5));
+                    quiz.setQuestions(question);
+                    returnList.add(quiz);
+                } while (cursor.moveToNext());
+                Log.d("Display Quizzes", "Quizzes Table is fetched");
+            } else {
+                //If flashCard table is empty
+                Log.d("Display Quizzes", "Quizzes Table is empty");
+            }
+        }catch (Exception e){
+            Log.d("Display Quizzes", "Error : "+e.getMessage());
+        }finally {
+            db.close();
+        }
+        return returnList;
+    }
+
+    //Get all the quizzes NotAttempted with given Topic.
+    public List<QuizModel> getAllQuizzesWithTopicNotAttempted (String topic){
+        List<QuizModel> returnList = new ArrayList<>();
+        boolean valid = false;
+        for(String tp: topics){
+            if(tp.equals(topic)){
+                valid = true;
+            }
+        }
+        if(valid) {
+            String query = "SELECT quiz." + QUIZ_ID + ", quiz." + COLUMN_isATTEMPTED + ", q." + QUESTION_ID + ", " +
+                    "q." + COLUMN_QUESTION + ", q." + COLUMN_ANSWER + " FROM " + QUIZZES_TABLE +
+                    " AS quiz JOIN " + QUESTIONS_TABLE + " AS q ON quiz." + COLUMN_QUESTIONS_ID + " = q." + QUESTION_ID +
+                    " AND q." +COLUMN_TOPICS_ID+ " = (SELECT " +TOPICS_ID+ " from " +TOPICS_TABLE+
+                    " where " +COLUMN_TOPIC+ " = \"" +topic+ "\") AND quiz." +COLUMN_isATTEMPTED+ " = 0 ";
             Log.d("*String query*", query);
             SQLiteDatabase db = this.getReadableDatabase();
             try {
