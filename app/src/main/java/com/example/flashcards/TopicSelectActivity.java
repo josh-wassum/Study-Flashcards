@@ -25,20 +25,20 @@ public class TopicSelectActivity extends AppCompatActivity {
         String topic;
         switch (v.getId()){
             case R.id.topic_addition_btn:
-                topic = "addition";
+                topic = "ADDITION";
                 break;
             case R.id.topic_subtraction_btn:
-                topic = "subtraction";
+                topic = "SUBTRACTION";
                 break;
             case R.id.topic_multiplication_btn:
-                topic = "multiplication";
+                topic = "MULTIPLICATION";
                 break;
             case R.id.topic_division_btn:
-                topic = "division";
+                topic = "DIVISION";
                 break;
             default:
                 // Should never happen as only the four above buttons should call this
-                topic = "error";
+                topic = "ERROR";
                 break;
         }
 
