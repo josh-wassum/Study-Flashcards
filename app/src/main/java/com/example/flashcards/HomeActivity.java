@@ -22,16 +22,18 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void launchPractice(View v){
-        // Switches to the practice screen via a button
+        // Switches to the practice screen via a button AFTER passing through topic select
 
-        Intent i = new Intent(this, PracticeActivity.class);
+        Intent i = new Intent(this, TopicSelectActivity.class);
+        i.putExtra("mode","practice");
         startActivity(i);
     }
 
     public void launchQuizzes(View v){
-        // Switches to the quiz screen via a button
+        // Switches to the quiz screen via a button AFTER passing through topic select
 
-        Intent i = new Intent(this, QuizzesActivity.class);
+        Intent i = new Intent(this, TopicSelectActivity.class);
+        i.putExtra("mode", "Quiz");
         startActivity(i);
     }
 }
