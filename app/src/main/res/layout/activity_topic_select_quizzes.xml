@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TopicSelectQuizzes">
+
+    <Button
+        android:id="@+id/quizz_topic_add_btn"
+        android:layout_width="240dp"
+        android:layout_height="83dp"
+        android:layout_marginBottom="16dp"
+        android:text="Addition"
+        android:textAllCaps="true"
+        android:textSize="23sp"
+        app:layout_constraintBottom_toTopOf="@+id/quizz_topic_subs_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/quizz_topic_subs_btn"
+        android:layout_width="240dp"
+        android:layout_height="83dp"
+        android:layout_marginBottom="16dp"
+        android:text="Substraccion"
+        android:textSize="23sp"
+        app:layout_constraintBottom_toTopOf="@+id/quizz_topic_mult_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/topic_title_text"
+        android:layout_width="226dp"
+        android:layout_height="90dp"
+        android:fontFamily="@font/annie_use_your_telescope"
+        android:text="Select Topic"
+        android:textAllCaps="false"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/quizz_topic_add_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.836" />
+
+    <Button
+        android:id="@+id/quizz_topic_back_btn"
+        android:layout_width="145dp"
+        android:layout_height="75dp"
+        android:text="Back"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quizz_topic_div_btn"
+        app:layout_constraintVertical_bias="0.546" />
+
+    <Button
+        android:id="@+id/quizz_topic_div_btn"
+        android:layout_width="240dp"
+        android:layout_height="83dp"
+        android:layout_marginBottom="172dp"
+        android:text="Division"
+        android:textSize="23sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/quizz_topic_mult_btn"
+        android:layout_width="240dp"
+        android:layout_height="83dp"
+        android:layout_marginBottom="12dp"
+        android:text="Multiplication"
+        android:textSize="23sp"
+        app:layout_constraintBottom_toTopOf="@+id/quizz_topic_div_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
