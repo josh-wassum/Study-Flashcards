@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.flashcards.library.DataBaseHelper;
@@ -19,49 +21,103 @@ public class QuizzesActivity extends AppCompatActivity {
 
     public DataBaseHelper dbHelper;
     public List<QuizModel> quizzes = new ArrayList<>();
+    private int currentCardIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quizzes);
 
-        /******************************Testing for getAllQuizzes and getAllQuizWithTopic **************/
-        String value = "AllFlashCard: ";
         dbHelper = new DataBaseHelper(this);
-        int question_no = 4;
-        QuizModel quizModel = new QuizModel();
-        quizzes = dbHelper.getAllQuizzesWithTopicNotAttempted("DIVISION");
 
-        if(quizzes.size() >= question_no){
-            for(int i = 0;i<question_no;i++){
-                quizModel = quizzes.get(i);
-                Log.d("Question "+i, quizModel.getQuestions().getQuestion());
-            }
-        }else{
-            Log.d("Question ", "Congrats you have attempted all quizzes");
-        }
+        Intent intent = getIntent();
+        String topic = intent.getStringExtra("topic");
+        quizzes = dbHelper.getAllQuizzesWithTopic(topic);
 
-        for (QuizModel quiz : quizzes) {
-            Log.d("Quiz Value", quiz.toString());
-            value += quiz.toString();
-        }
+        TextView topicView = findViewById(R.id.quiz_topic);
+        topicView.setText(topic);
+        ProgressBar progress = findViewById(R.id.quiz_progress_bar);
+        progress.setMax(quizzes.size());
 
-        //getAllQuizzesWithTopic : Possible values are "ADDITION", "SUBTRACTION", "MULTIPLICATION", "DIVISION"
-        quizzes = dbHelper.getAllQuizzesWithTopic("MULTIPLICATION");
-        value += " \n Topic: MULTIPLICATION: ";
-        for (QuizModel quiz : quizzes) {
-            Log.d("Quiz Value", quiz.toString());
-            value += quiz.toString();
-        }
-        Toast.makeText(QuizzesActivity.this,value,Toast.LENGTH_SHORT).show();
-        /******************************************  END  *************************************/
+        updateUI();
+
+//        /******************************Testing for getAllQuizzes and getAllQuizWithTopic **************/
+//        String value = "AllFlashCard: ";
+//        dbHelper = new DataBaseHelper(this);
+//        int question_no = 4;
+//        QuizModel quizModel = new QuizModel();
+//        quizzes = dbHelper.getAllQuizzesWithTopicNotAttempted("DIVISION");
+//
+//        if(quizzes.size() >= question_no){
+//            for(int i = 0;i<question_no;i++) {
+//                quizModel = quizzes.get(i);
+//                Log.d("Question "+i, quizModel.getQuestions().getQuestion());
+//            }
+//        }else{
+//            Log.d("Question ", "Congrats you have attempted all quizzes");
+//        }
+//
+//        for (QuizModel quiz : quizzes) {
+//            Log.d("Quiz Value", quiz.toString());
+//            value += quiz.toString();
+//        }
+//
+//        //getAllQuizzesWithTopic : Possible values are "ADDITION", "SUBTRACTION", "MULTIPLICATION", "DIVISION"
+//        quizzes = dbHelper.getAllQuizzesWithTopic("MULTIPLICATION");
+//        value += " \n Topic: MULTIPLICATION: ";
+//        for (QuizModel quiz : quizzes) {
+//            Log.d("Quiz Value", quiz.toString());
+//            value += quiz.toString();
+//        }
+//        Toast.makeText(QuizzesActivity.this,value,Toast.LENGTH_SHORT).show();
+//        /******************************************  END  *************************************/
 
 
     }
 
     public void launchHome(View v){
-        // Returns to the home screen via a button
+        segueHome();
+    }
 
+    public boolean isInputValid(String input){
+        // Returns true or false based on set requirements
+
+        // Currently we are only checking for some kind of input (Could be simplified but we'll need to add more later)
+        if (input.length() > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public void submitIsPressed(View v) {
+        QuizModel currentCard = quizzes.get(currentCardIndex);
+
+        TextView answer = findViewById(R.id.quiz_answer);
+        String input = answer.getText().toString();
+        if (isInputValid(input)) {
+            if (input.equalsIgnoreCase(currentCard.getQuestions().getAnswer())) {
+                if (currentCardIndex + 1 < quizzes.size()) {
+                    currentCardIndex += 1;
+                    updateUI();
+                } else {
+                    segueHome();
+                }
+            }
+        }
+    }
+
+    private void updateUI() {
+        QuizModel currentCard = quizzes.get(currentCardIndex);
+        ProgressBar progress = findViewById(R.id.quiz_progress_bar);
+        TextView question = findViewById(R.id.quiz_question);
+
+        progress.setProgress(currentCardIndex + 1);
+        question.setText(currentCard.getQuestions().getQuestion());
+    }
+
+    private void segueHome() {
         Intent i = new Intent(this, HomeActivity.class);
         startActivity(i);
     }

@@ -24,6 +24,7 @@
         android:id="@+id/quiz_submit_btn"
         android:layout_width="165dp"
         android:layout_height="82dp"
+        android:onClick="submitIsPressed"
         android:text="Submit"
         android:textAlignment="center"
         android:textSize="25dp"
