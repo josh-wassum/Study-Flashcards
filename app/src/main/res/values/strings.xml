@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">flashcards</string>
+    <string name="mastery">Mastery</string>
+    <string name="topic">Topic</string>
+    <string name="home">Home</string>
 </resources>
