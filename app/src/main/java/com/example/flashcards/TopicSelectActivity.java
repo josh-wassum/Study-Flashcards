@@ -3,6 +3,7 @@ package com.example.flashcards;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 
@@ -41,7 +42,9 @@ public class TopicSelectActivity extends AppCompatActivity {
                 topic = "ERROR";
                 break;
         }
-
+        // Adding sound
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this,R.raw.btn_sound);
+        mediaPlayer.start();
         // Initialize the new intent
         Intent i;
         // If we desire practice mode, launch the practice activity
