@@ -3,6 +3,7 @@ package com.example.flashcards;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -92,6 +93,10 @@ public class PracticeActivity extends AppCompatActivity {
 //    }
 
     private void segueHome() {
+        // Adding sound
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this,R.raw.btn_sound);
+        mediaPlayer.start();
+
         Intent i = new Intent(this, HomeActivity.class);
         startActivity(i);
     }
