@@ -25,25 +25,36 @@ public class PracticeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_practice);
 
-        /******************************Testing for getAllFlashCard and getAllFlashCardWithTopic **************/
-        String value = "AllFlashCard: ";
         dbHelper = new DataBaseHelper(this);
 
-        practiceCards = dbHelper.getAllFlashCards();
-        for (FlashCardModel flashCard : practiceCards) {
-            Log.d("Flash Card Value", flashCard.toString());
-            value += flashCard.toString();
-        }
+        Intent intent = getIntent();
+        String topic = intent.getStringExtra("topic");
+        practiceCards = dbHelper.getAllFlashCardsWithTopic(topic);
 
-        //getAllFlashCardWithTopic : Possible values are "ADDITION", "SUBTRACTION", "MULTIPLICATION", "DIVISION"
-        practiceCards = dbHelper.getAllFlashCardsWithTopic("ADDITION");
-        value += " \n Topic: ADDITION: ";
-        for (FlashCardModel flashCard : practiceCards) {
-            Log.d("Flash Card Value", flashCard.toString());
-            value += flashCard.toString();
-        }
-        Toast.makeText(PracticeActivity.this,value,Toast.LENGTH_SHORT).show();
-        /******************************************  END  *************************************/
+        TextView topicView = findViewById(R.id.practice_topic);
+        topicView.setText(topic);
+
+        updateUI();
+
+//        /******************************Testing for getAllFlashCard and getAllFlashCardWithTopic **************/
+//        String value = "AllFlashCard: ";
+//        dbHelper = new DataBaseHelper(this);
+//
+//        practiceCards = dbHelper.getAllFlashCards();
+//        for (FlashCardModel flashCard : practiceCards) {
+//            Log.d("Flash Card Value", flashCard.toString());
+//            value += flashCard.toString();
+//        }
+//
+//        //getAllFlashCardWithTopic : Possible values are "ADDITION", "SUBTRACTION", "MULTIPLICATION", "DIVISION"
+//        practiceCards = dbHelper.getAllFlashCardsWithTopic("ADDITION");
+//        value += " \n Topic: ADDITION: ";
+//        for (FlashCardModel flashCard : practiceCards) {
+//            Log.d("Flash Card Value", flashCard.toString());
+//            value += flashCard.toString();
+//        }
+//        Toast.makeText(PracticeActivity.this,value,Toast.LENGTH_SHORT).show();
+//        /******************************************  END  *************************************/
 
     }
 
@@ -63,34 +74,32 @@ public class PracticeActivity extends AppCompatActivity {
         }
     }
 
-//    public void submitIsPressed(View v) {
-//        FlashCardModel currentCard = practiceCards.get(currentCardIndex);
-//
-//        TextView answer = findViewById(R.id.practice_answer);
-//        String input = answer.getText().toString();
-//        if (isInputValid(input)) {
-//            //answer.setText(currentCard.getFlashCardAnswer());
-//            if (input.equalsIgnoreCase(currentCard.getFlashCardAnswer())) {
-//                if (currentCardIndex + 1 < practiceCards.size()) {
-//                    currentCardIndex += 1;
-//                    updateUI();
-//                } else {
-//                    segueHome();
-//                }
-//            }
-//        }
-//    }
+    public void submitIsPressed(View v) {
+        FlashCardModel currentCard = practiceCards.get(currentCardIndex);
 
-//    private void updateUI() {
-//        FlashCardModel currentCard =  practiceCards.get(currentCardIndex);
-//        TextView topic = findViewById(R.id.practice_topic);
-//        TextView total = findViewById(R.id.practice_score);
-//        TextView question = findViewById(R.id.practice_question);
-//
-//        topic.setText("DB Helper ?'s");
-//        total.setText(String.format("Question %d / %d", currentCardIndex + 1, practiceCards.size()));
-//        question.setText(currentCard.getFlashCardQuestion());
-//    }
+        TextView answer = findViewById(R.id.practice_answer);
+        String input = answer.getText().toString();
+        if (isInputValid(input)) {
+            //answer.setText(currentCard.getFlashCardAnswer());
+            if (input.equalsIgnoreCase(currentCard.getQuestions().getAnswer())) {
+                if (currentCardIndex + 1 < practiceCards.size()) {
+                    currentCardIndex += 1;
+                    updateUI();
+                } else {
+                    segueHome();
+                }
+            }
+        }
+    }
+
+    private void updateUI() {
+        FlashCardModel currentCard = practiceCards.get(currentCardIndex);
+        TextView total = findViewById(R.id.practice_score);
+        TextView question = findViewById(R.id.practice_question);
+
+        total.setText(String.format("Question %d / %d", currentCardIndex + 1, practiceCards.size()));
+        question.setText(currentCard.getQuestions().getQuestion());
+    }
 
     private void segueHome() {
         // Adding sound
