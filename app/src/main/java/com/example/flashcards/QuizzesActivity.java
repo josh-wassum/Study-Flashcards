@@ -3,6 +3,7 @@ package com.example.flashcards;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -116,6 +117,11 @@ public class QuizzesActivity extends AppCompatActivity {
         progress.setProgress(currentCardIndex + 1);
         question.setText(currentCard.getQuestions().getQuestion());
     }
+
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this,R.raw.btn_sound);
+        mediaPlayer.start();
+        // Returns to the home screen via a button
+
 
     private void segueHome() {
         Intent i = new Intent(this, HomeActivity.class);
