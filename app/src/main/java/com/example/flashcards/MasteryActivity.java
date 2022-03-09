@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.flashcards.library.DataBaseHelper;
@@ -32,4 +34,24 @@ public class MasteryActivity extends AppCompatActivity {
         Intent i = new Intent(this, HomeActivity.class);
         startActivity(i);
     }
+
+    public void updateProgress(View v){
+        // updates the progress graphics to reflect the entered progress. This will be moved to the
+        // Oncreate function and only need to run once when we are able to have the mastery passed
+        // into this activity
+
+        // Get reference of the progress value (for now just entered by user)
+        TextView progress = findViewById(R.id.progress_text);
+        // Convert input to string, and then to an int
+        String input = progress.getText().toString();
+        int progressnumber = Integer.parseInt(input);
+
+        // Create the offset using the progress (out of 100)
+        int astronautoffset = progressnumber * -12;
+
+        // Get the image of the astronaut and set it's transformation in the y direction to the offset
+        ImageView astronaut = findViewById(R.id.astronaut_image);
+        astronaut.setTranslationY(astronautoffset);
+    }
+
 }
