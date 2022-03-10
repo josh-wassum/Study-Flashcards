@@ -14,14 +14,13 @@ import com.example.flashcards.models.QuestionModel;
 import com.example.flashcards.models.QuizModel;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 
     // If you change the database schema, you must increment the database version.
     public static final String DATABASE_NAME = "MathToMoon.db";
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
 
     //Topics table constraints
     public static final String TOPICS_ID = "Tid";
@@ -55,7 +54,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String MASTERY_TABLE = "Mastery";
     public static final String MASTERY_ID = "Mid";
     public static final String COLUMN_STATUS = "status";
-    public static final String DEFAULT_STATUS = "Lieutenant";
+    public static final int DEFAULT_STATUS = 0;
 
 
 
@@ -139,7 +138,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         //Creating statement for Mastery Table
         String createMasteryTableStatement = "CREATE TABLE " + MASTERY_TABLE + " ("
                 + MASTERY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + COLUMN_STATUS + " TEXT )";
+                + COLUMN_STATUS + " INTEGER )";
 
         try {
             //Executing Topics Table
@@ -169,6 +168,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     //This is called if the database version number changes. It prevents user apps from breaking when you change the database schema
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + TOPICS_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + MASTERY_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + QUIZZES_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + FLASHCARDS_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + QUESTIONS_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + ANSWERS_TABLE);
+        onCreate(db);
 
     }
 
@@ -655,17 +661,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     //When user has attempted a quiz, call this function to update the isATTEMPTED.
-    public Boolean updateQuizAttempted(int quizID,boolean isFlashCardAttempted){
+    public Boolean updateQuizAttempted(int quizID,boolean isQuizAttempted){
         boolean value = false;
         String condition = QUIZ_ID+" = ?";
         String querySelect = "SELECT * FROM "+QUIZZES_TABLE+" WHERE "+condition;
         SQLiteDatabase db= this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_isATTEMPTED, isFlashCardAttempted);
+        contentValues.put(COLUMN_isATTEMPTED, isQuizAttempted);
         try {
             Cursor cursor = db.rawQuery(querySelect, new String[]{String.valueOf(quizID)});
             if (cursor.getCount() > 0) {
-                long result = db.update(FLASHCARDS_TABLE, contentValues, condition, new String[]{String.valueOf(quizID)});
+                long result = db.update(QUIZZES_TABLE, contentValues, condition, new String[]{String.valueOf(quizID)});
                 if (result == -1) {
                     Log.d("Update Quiz isAttempted", "Update has failed");
                     value = false;
@@ -687,17 +693,15 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     //Get Mastery Table
-    //Here I used the Mastery as a ranking(Like in military Lieutenant -> Captain -> Major -> Colonel -> General).
-    // We can discuss this in the coming meeting. If we are using the percentage I can change the variable
-    public String getMastery(){
+    public int getMastery(){
         SQLiteDatabase db = this.getReadableDatabase();
-        String status = "";
+        int status = 0;
         String query = "SELECT "+ COLUMN_STATUS + " FROM " + MASTERY_TABLE + " WHERE " + MASTERY_ID + " = 1";
         try {
             Cursor cursor = db.rawQuery(query, null);
 
             if (cursor.moveToFirst()) {
-                status = cursor.getString(0);
+                status = cursor.getInt(0);
                 Log.d("Mastery Table", COLUMN_STATUS+" is fetched");
             } else {
                 //If table is empty
@@ -707,6 +711,54 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             Log.d("Mastery Table", "Error : "+e.getMessage());
         }
         return status;
+    }
+
+    //When user has attempted a quiz, call this function to update the isATTEMPTED.
+    public Boolean updateMastery(int status){
+        int masteryID = 1;
+        boolean value = false;
+        String condition = MASTERY_ID+" = ?";
+        String querySelect = "SELECT * FROM "+MASTERY_TABLE+" WHERE "+condition;
+        SQLiteDatabase db= this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_STATUS, status);
+        try {
+            Cursor cursor = db.rawQuery(querySelect, new String[]{String.valueOf(masteryID)});
+            if (cursor.getCount() > 0) {
+                long result = db.update(MASTERY_TABLE, contentValues, condition, new String[]{String.valueOf(masteryID)});
+                if (result == -1) {
+                    Log.d("Update Mastery position", "Update has failed");
+                    value = false;
+                } else {
+                    Log.d("Update Mastery position", "Update has Successful");
+                    value = true;
+                }
+            } else {
+                Log.d("Update Mastery position", "Invalid Quiz ID");
+                value = false;
+            }
+        }catch (Exception e){
+            Log.d("Update Mastery position", "Error : "+e.getMessage());
+        }
+        finally {
+            db.close();
+            return value;
+        }
+    }
+
+    public void insertUserAnswer(double userAnswer, int questionId, String questionType, boolean isCorrect){
+        SQLiteDatabase db = this.getWritableDatabase();
+        try{
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(QUESTION_ID, questionId);
+            contentValues.put(COLUMN_USER_ANSWER, userAnswer);
+            contentValues.put(COLUMN_TYPE, questionType);
+            contentValues.put(COLUMN_isCORRECT, isCorrect);
+            db.insert(ANSWERS_TABLE,null,contentValues);
+            Log.d("Answers Table", "Initial status have successfully inserted");
+        }catch (Exception e){
+            Log.d("Answers Table", "There was some error while inserting status - "+e.getMessage());
+        }
     }
 
 }
