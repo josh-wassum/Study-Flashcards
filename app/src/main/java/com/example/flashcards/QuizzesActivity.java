@@ -118,8 +118,8 @@ public class QuizzesActivity extends AppCompatActivity {
         question.setText(currentCard.getQuestions().getQuestion());
     }
 
-        final MediaPlayer mediaPlayer = MediaPlayer.create(this,R.raw.btn_sound);
-        mediaPlayer.start();
+//        final MediaPlayer mediaPlayer = MediaPlayer.create(this,R.raw.btn_sound);
+//        mediaPlayer.start();
         // Returns to the home screen via a button
 
 

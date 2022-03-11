@@ -68,17 +68,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void submitIsPressed(View v) {
-        // The Onclick event for the submit button, presently does nothing with the input
-        TextView answer = findViewById(R.id.answer);
-        String input = answer.getText().toString();
-        if (isInputValid(input)) {
-            // If input is valid, transfer to the home activity!
-            Intent i = new Intent(this, HomeActivity.class);
-            startActivity(i);
-        }
-    }
-
     //I presume these will be helpful for you guys:
     //https://stackoverflow.com/questions/26943038/how-to-make-clickable-and-editable-textfield-in-android
     //https://stackoverflow.com/questions/6274021/implement-uitextfield-properties-in-android

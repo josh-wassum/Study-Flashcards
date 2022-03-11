@@ -11,7 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.flashcards.library.DataBaseHelper;
-import com.example.flashcards.models.FlashCardModel;
 
 public class MasteryActivity extends AppCompatActivity {
 
@@ -23,9 +22,9 @@ public class MasteryActivity extends AppCompatActivity {
 
         //Testing for mastery.status from db
         dbHelper = new DataBaseHelper(this);
-        String value = dbHelper.getMastery();
+        int value = dbHelper.getMastery();
         Log.d("Flash Card Value", "Mastery Value "+value);
-        Toast.makeText(MasteryActivity.this,value,Toast.LENGTH_SHORT).show();
+        Toast.makeText(MasteryActivity.this,"Mastery value = "+value,Toast.LENGTH_SHORT).show();
     }
 
     public void launchHome(View v){
@@ -40,11 +39,12 @@ public class MasteryActivity extends AppCompatActivity {
         // Oncreate function and only need to run once when we are able to have the mastery passed
         // into this activity
 
-        // Get reference of the progress value (for now just entered by user)
-        TextView progress = findViewById(R.id.progress_text);
-        // Convert input to string, and then to an int
-        String input = progress.getText().toString();
-        int progressnumber = Integer.parseInt(input);
+//        // Get reference of the progress value (for now just entered by user)
+//        TextView progress = findViewById(R.id.progress_text);
+//        // Convert input to string, and then to an int
+//        String input = progress.getText().toString();
+//        int progressnumber = Integer.parseInt(input);
+        int progressnumber = dbHelper.getMastery();
 
         // Create the offset using the progress (out of 100)
         int astronautoffset = progressnumber * -12;
