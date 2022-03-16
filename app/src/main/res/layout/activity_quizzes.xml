@@ -12,8 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="280dp"
         android:ems="10"
-        android:inputType="numberDecimal"
-        android:hint="Answer"
+        android:hint="answer"
+        android:inputType="number"
         android:textAlignment="center"
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -50,8 +50,8 @@
 
     <TextView
         android:id="@+id/quiz_topic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="298dp"
+        android:layout_height="59dp"
         android:layout_marginTop="64dp"
         android:text="Title"
         android:textAlignment="center"
