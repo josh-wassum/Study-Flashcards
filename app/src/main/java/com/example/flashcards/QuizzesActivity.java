@@ -108,14 +108,23 @@ public class QuizzesActivity extends AppCompatActivity {
             }
         }
     }
-
+    public int current_progress = 0;
+    //Change value to max number of questions
+    public int max_num_questions = 5;
     private void updateUI() {
         QuizModel currentCard = quizzes.get(currentCardIndex);
         ProgressBar progress = findViewById(R.id.quiz_progress_bar);
         TextView question = findViewById(R.id.quiz_question);
 
-        progress.setProgress(currentCardIndex + 1);
+        //Setting up progress bar to start from 0
+        progress.setProgress(current_progress);
+
+        //Setting up progress bar to have a max of total number of questions
+        progress.setMax(max_num_questions);
         question.setText(currentCard.getQuestions().getQuestion());
+
+        //Adding 1 each time this class is called so the progress bar increases each time
+        current_progress ++;
     }
 
 //        final MediaPlayer mediaPlayer = MediaPlayer.create(this,R.raw.btn_sound);

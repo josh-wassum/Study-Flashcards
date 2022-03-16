@@ -23,6 +23,7 @@
         android:layout_height="51dp"
         android:layout_marginTop="188dp"
         android:text="Question"
+        android:textAlignment="center"
         android:textSize="30dp"
         app:layout_constraintBottom_toTopOf="@+id/practice_answer"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,25 +35,27 @@
         android:id="@+id/practice_score"
         android:layout_width="184dp"
         android:layout_height="51dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginBottom="32dp"
         android:text="# Total"
         android:textSize="28dp"
         app:layout_constraintBottom_toTopOf="@+id/practice_question"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.519"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/practice_topic"
         android:layout_width="184dp"
         android:layout_height="51dp"
         android:text="Topic"
+        android:textAlignment="center"
         android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/practice_score"
+        app:layout_constraintBottom_toTopOf="@+id/practice_progress_bar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.553" />
 
     <EditText
         android:id="@+id/practice_answer"
@@ -61,7 +64,8 @@
         android:layout_marginBottom="60dp"
         android:ems="10"
         android:hint="answer"
-        android:inputType="textPersonName"
+        android:inputType="number"
+        android:textAlignment="center"
         android:textSize="28dp"
         app:layout_constraintBottom_toTopOf="@+id/practice_submit_btn"
         app:layout_constraintEnd_toEndOf="parent"
@@ -77,6 +81,16 @@
         android:text="Submit"
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/practice_progress_bar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="318dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/practice_score"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
