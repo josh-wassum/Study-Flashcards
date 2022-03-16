@@ -80,7 +80,27 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                                                       new QuestionModel(0, "42 / 6", "7", "DIVISION"),
                                                       new QuestionModel(0, "50 / (2 + 3)", "10", "DIVISION"),
                                                       new QuestionModel(0, "24 / ( 10 -4)", "4", "DIVISION"),
-                                                      new QuestionModel(0, "24 / 6 - 2", "2", "DIVISION")};
+                                                      new QuestionModel(0, "24 / 6 - 2", "2", "DIVISION"),
+                                                        new QuestionModel(0, "10 + 5", "15", "ADDITION"),
+                                                        new QuestionModel(0, "18 + 8 + 12", "38", "ADDITION"),
+                                                        new QuestionModel(0, "12 + 6", "18", "ADDITION"),
+                                                        new QuestionModel(0, "14 + 7 + 21", "42", "ADDITION"),
+                                                        new QuestionModel(0, "14 + 7 + 21", "42", "ADDITION"),
+                                                        new QuestionModel(0, "(10 - 5)", "5", "SUBTRACTION"),
+                                                        new QuestionModel(0, "(19 - 23)", "-4", "SUBTRACTION"),
+                                                        new QuestionModel(0, "(53 - 25)", "28", "SUBTRACTION"),
+                                                        new QuestionModel(0, "(8 - 4 - 2)", "2", "SUBTRACTION"),
+                                                        new QuestionModel(0, "(83 - 50 - 23 - 6)", "4", "SUBTRACTION"),
+                                                        new QuestionModel(0, "8 * 2", "16", "MULTIPLICATION"),
+                                                        new QuestionModel(0, "7 * 7", "49", "MULTIPLICATION"),
+                                                        new QuestionModel(0, "5 * (6 + 4)", "50", "MULTIPLICATION"),
+                                                        new QuestionModel(0, "4 * 7 * 9", "252", "MULTIPLICATION"),
+                                                        new QuestionModel(0, "8 * (6 - 2)", "32", "MULTIPLICATION"),
+                                                        new QuestionModel(0, "15 / 3", "5", "DIVISION"),
+                                                        new QuestionModel(0, "42 / 6", "7", "DIVISION"),
+                                                        new QuestionModel(0, "50 / (2 + 3)", "10", "DIVISION"),
+                                                        new QuestionModel(0, "24 / ( 10 -4)", "4", "DIVISION"),
+                                                        new QuestionModel(0, "24 / 6 - 2", "2", "DIVISION")};
 
 
 
@@ -210,7 +230,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     //This function is to insert initial values of flashcards
     public void insertFlashCards(SQLiteDatabase db){
-        int questionIds[] = {1,2,3,4,5,6,7,8,9,10};       //Since we know what questionId will be, just inserting values manually.
+        int questionIds[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20};       //Since we know what questionId will be, just inserting values manually.
         try{
             for(int questionId: questionIds){
                 ContentValues contentValues = new ContentValues();
@@ -226,7 +246,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     //This function is to insert initial values of Quizzes
     public void insertQuizzes(SQLiteDatabase db){
         //db = this.getWritableDatabase();
-        int questionIds[] = {11,12,13,14,15,16,17,18,19,20};       //Since we know what questionId will be, just inserting values manually.
+        int questionIds[] = {21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40};       //Since we know what questionId will be, just inserting values manually.
         try{
             for(int questionId: questionIds){
                 ContentValues contentValues = new ContentValues();

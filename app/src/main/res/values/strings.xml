@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">flashcards</string>
-    <string name="mastery">Mastery</string>
     <string name="topic">Topic</string>
     <string name="home">Home</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="practice" />
+    <string name="practiceA">practice</string>
+    <string name="quizzes">Quizzes</string>
+    <string name="mastery">Mastery</string>
 </resources>

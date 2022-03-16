@@ -7,54 +7,68 @@
     tools:context=".TopicSelectActivity">
 
     <Button
-        android:id="@+id/topic_subtraction_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="65dp"
+        android:id="@+id/topic_addition_btn"
+        android:layout_width="240dp"
+        android:layout_height="83dp"
+        android:layout_marginBottom="16dp"
+        android:text="Addition"
         android:onClick="launchActivity"
-        android:text="Subtraction"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/topic_multiplication_btn"
+        android:textAllCaps="true"
+        android:textSize="23sp"
+        app:layout_constraintBottom_toTopOf="@+id/topic_subtraction_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/topic_multiplication_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="65dp"
+        android:id="@+id/topic_subtraction_btn"
+        android:layout_width="240dp"
+        android:layout_height="83dp"
+        android:layout_marginBottom="16dp"
+        android:text="subtraction"
         android:onClick="launchActivity"
-        android:text="Multiplication"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/topic_division_btn"
+        android:textSize="23sp"
+        app:layout_constraintBottom_toTopOf="@+id/topic_multiplication_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/topic_title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="Select Topic"
+        android:textAllCaps="false"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toTopOf="@+id/topic_addition_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.836" />
 
     <Button
         android:id="@+id/topic_division_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="65dp"
-        android:layout_marginBottom="304dp"
-        android:onClick="launchActivity"
+        android:layout_width="240dp"
+        android:layout_height="83dp"
+        android:layout_marginBottom="172dp"
         android:text="Division"
-        android:textSize="18sp"
+        android:onClick="launchActivity"
+        android:textSize="23sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/topic_addition_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="65dp"
+        android:id="@+id/topic_multiplication_btn"
+        android:layout_width="240dp"
+        android:layout_height="83dp"
+        android:layout_marginBottom="12dp"
+        android:text="Multiplication"
         android:onClick="launchActivity"
-        android:text="Addition"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/topic_subtraction_btn"
+        android:textSize="23sp"
+        app:layout_constraintBottom_toTopOf="@+id/topic_division_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

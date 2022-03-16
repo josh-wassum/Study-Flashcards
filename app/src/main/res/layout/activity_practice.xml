@@ -6,21 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".PracticeActivity">
 
-    <Button
-        android:id="@+id/home_button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        android:onClick="launchHome"
-        android:text="HOME (debug)"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <TextView
         android:id="@+id/practice_question"
-        android:layout_width="184dp"
-        android:layout_height="51dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="188dp"
         android:text="Question"
         android:textAlignment="center"
@@ -33,9 +22,9 @@
 
     <TextView
         android:id="@+id/practice_score"
-        android:layout_width="184dp"
-        android:layout_height="51dp"
-        android:layout_marginBottom="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
         android:text="# Total"
         android:textSize="28dp"
         app:layout_constraintBottom_toTopOf="@+id/practice_question"
@@ -45,8 +34,8 @@
 
     <TextView
         android:id="@+id/practice_topic"
-        android:layout_width="184dp"
-        android:layout_height="51dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Topic"
         android:textAlignment="center"
         android:textSize="30dp"
@@ -59,8 +48,8 @@
 
     <EditText
         android:id="@+id/practice_answer"
-        android:layout_width="234dp"
-        android:layout_height="57dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="60dp"
         android:ems="10"
         android:hint="answer"
@@ -74,8 +63,8 @@
 
     <Button
         android:id="@+id/practice_submit_btn"
-        android:layout_width="175dp"
-        android:layout_height="63dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="228dp"
         android:onClick="submitIsPressed"
         android:text="Submit"

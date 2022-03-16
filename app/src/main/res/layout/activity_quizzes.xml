@@ -8,8 +8,8 @@
 
     <EditText
         android:id="@+id/quiz_answer"
-        android:layout_width="245dp"
-        android:layout_height="66dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="280dp"
         android:ems="10"
         android:hint="answer"
@@ -22,8 +22,8 @@
 
     <Button
         android:id="@+id/quiz_submit_btn"
-        android:layout_width="165dp"
-        android:layout_height="82dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:onClick="submitIsPressed"
         android:text="Submit"
         android:textAlignment="center"
@@ -35,9 +35,9 @@
 
     <TextView
         android:id="@+id/quiz_question"
-        android:layout_width="180dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="92dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
         android:text="Question"
         android:textAlignment="center"
         android:textSize="25dp"
@@ -71,15 +71,4 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/quiz_topic" />
-
-    <Button
-        android:id="@+id/home_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        android:onClick="launchHome"
-        android:text="HOME (debug)"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
