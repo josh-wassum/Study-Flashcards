@@ -5,14 +5,30 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
+
+import com.example.flashcards.library.DataBaseHelper;
 
 public class TopicSelectActivity extends AppCompatActivity {
+
+    public DataBaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_topic_select);
+
+        dbHelper = new DataBaseHelper(this);
+        int value = dbHelper.getMastery();
+        Log.d("Flash Card Value", "Mastery Value "+value);
+        Toast.makeText(TopicSelectActivity.this,"Mastery value = "+value,Toast.LENGTH_SHORT).show();
+
+        // if mastery_status == true where mastery_id = previous quiz/practice topic || topic = addition and mode = practice
+        // android:setClickable(true)
+        // else
+        // false
     }
 
     public void launchActivity(View v){
