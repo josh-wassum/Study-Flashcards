@@ -20,7 +20,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     // If you change the database schema, you must increment the database version.
     public static final String DATABASE_NAME = "MathToMoon.db";
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 3;
 
     //Topics table constraints
     public static final String TOPICS_ID = "Tid";
@@ -65,7 +65,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                                                       new QuestionModel(0, "18 + 8 + 12", "38", "ADDITION"),
                                                       new QuestionModel(0, "12 + 6", "18", "ADDITION"),
                                                       new QuestionModel(0, "14 + 7 + 21", "42", "ADDITION"),
-                                                      new QuestionModel(0, "14 + 7 + 21", "42", "ADDITION"),
+                                                      new QuestionModel(0, "14 + 20 + 21", "55", "ADDITION"),
                                                       new QuestionModel(0, "(10 - 5)", "5", "SUBTRACTION"),
                                                       new QuestionModel(0, "(19 - 23)", "-4", "SUBTRACTION"),
                                                       new QuestionModel(0, "(53 - 25)", "28", "SUBTRACTION"),
@@ -81,26 +81,26 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                                                       new QuestionModel(0, "50 / (2 + 3)", "10", "DIVISION"),
                                                       new QuestionModel(0, "24 / ( 10 -4)", "4", "DIVISION"),
                                                       new QuestionModel(0, "24 / 6 - 2", "2", "DIVISION"),
-                                                        new QuestionModel(0, "10 + 5", "15", "ADDITION"),
-                                                        new QuestionModel(0, "18 + 8 + 12", "38", "ADDITION"),
-                                                        new QuestionModel(0, "12 + 6", "18", "ADDITION"),
-                                                        new QuestionModel(0, "14 + 7 + 21", "42", "ADDITION"),
-                                                        new QuestionModel(0, "14 + 7 + 21", "42", "ADDITION"),
-                                                        new QuestionModel(0, "(10 - 5)", "5", "SUBTRACTION"),
-                                                        new QuestionModel(0, "(19 - 23)", "-4", "SUBTRACTION"),
-                                                        new QuestionModel(0, "(53 - 25)", "28", "SUBTRACTION"),
-                                                        new QuestionModel(0, "(8 - 4 - 2)", "2", "SUBTRACTION"),
-                                                        new QuestionModel(0, "(83 - 50 - 23 - 6)", "4", "SUBTRACTION"),
-                                                        new QuestionModel(0, "8 * 2", "16", "MULTIPLICATION"),
-                                                        new QuestionModel(0, "7 * 7", "49", "MULTIPLICATION"),
-                                                        new QuestionModel(0, "5 * (6 + 4)", "50", "MULTIPLICATION"),
-                                                        new QuestionModel(0, "4 * 7 * 9", "252", "MULTIPLICATION"),
-                                                        new QuestionModel(0, "8 * (6 - 2)", "32", "MULTIPLICATION"),
-                                                        new QuestionModel(0, "15 / 3", "5", "DIVISION"),
-                                                        new QuestionModel(0, "42 / 6", "7", "DIVISION"),
-                                                        new QuestionModel(0, "50 / (2 + 3)", "10", "DIVISION"),
-                                                        new QuestionModel(0, "24 / ( 10 -4)", "4", "DIVISION"),
-                                                        new QuestionModel(0, "24 / 6 - 2", "2", "DIVISION")};
+                                                      new QuestionModel(0, "9 + 5", "14", "ADDITION"),
+                                                      new QuestionModel(0, "20 + 11 + 12", "43", "ADDITION"),
+                                                      new QuestionModel(0, "12 + 12", "24", "ADDITION"),
+                                                      new QuestionModel(0, "30 + 7 + 40", "77", "ADDITION"),
+                                                      new QuestionModel(0, "25 + 8 + 3", "36", "ADDITION"),
+                                                      new QuestionModel(0, "(9 - 2)", "7", "SUBTRACTION"),
+                                                      new QuestionModel(0, "(36 - 25)", "11", "SUBTRACTION"),
+                                                      new QuestionModel(0, "(45 - 23)", "22", "SUBTRACTION"),
+                                                      new QuestionModel(0, "(10 - 5 - 1)", "4", "SUBTRACTION"),
+                                                      new QuestionModel(0, "(99 - 50 - 32 - 6)", "11", "SUBTRACTION"),
+                                                      new QuestionModel(0, "5 * 5", "25", "MULTIPLICATION"),
+                                                      new QuestionModel(0, "8 * 6", "48", "MULTIPLICATION"),
+                                                      new QuestionModel(0, "4 * (8 + 2)", "40", "MULTIPLICATION"),
+                                                      new QuestionModel(0, "4 * 5 * 8", "160", "MULTIPLICATION"),
+                                                      new QuestionModel(0, "8 * (2 - 2)", "0", "MULTIPLICATION"),
+                                                      new QuestionModel(0, "39 / 3", "13", "DIVISION"),
+                                                      new QuestionModel(0, "72 / 6", "12", "DIVISION"),
+                                                      new QuestionModel(0, "100 / (2 + 3)", "20", "DIVISION"),
+                                                      new QuestionModel(0, "78 / ( 10 -4)", "13", "DIVISION"),
+                                                      new QuestionModel(0, "60 / 6 - 2", "15", "DIVISION")};
 
 
 
@@ -733,7 +733,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return status;
     }
 
-    //When user has attempted a quiz, call this function to update the isATTEMPTED.
+    //function to update the mastery value
     public Boolean updateMastery(int status){
         int masteryID = 1;
         boolean value = false;
@@ -766,6 +766,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    //function to Insert users answer to the database
     public void insertUserAnswer(double userAnswer, int questionId, String questionType, boolean isCorrect){
         SQLiteDatabase db = this.getWritableDatabase();
         try{

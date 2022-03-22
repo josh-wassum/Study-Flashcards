@@ -4,69 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:onClick="updateProgress"
     tools:context=".MasteryActivity">
-
-    <EditText
-        android:id="@+id/progress_text"
-        android:layout_width="234dp"
-        android:layout_height="57dp"
-        android:layout_marginBottom="304dp"
-        android:ems="10"
-        android:hint="Progress"
-        android:inputType="textPersonName"
-        android:textSize="28dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/home_button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        android:onClick="launchHome"
-        android:text="HOME (debug)"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-    <TextView
-        android:id="@+id/mastery_total_progress"
-        android:layout_width="226dp"
-        android:layout_height="97dp"
-        android:layout_marginTop="164dp"
-        android:gravity="center"
-        android:text="Mastery: "
-        android:textAlignment="center"
-        android:textSize="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mastery_title" />
-
-    <TextView
-        android:id="@+id/mastery_title"
-        android:layout_width="234dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="64dp"
-        android:text="Mastery"
-        android:textAlignment="center"
-        android:textSize="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button_update"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="248dp"
-        android:onClick="updateProgress"
-        android:text="Update (DEBUG)"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/moon_image"

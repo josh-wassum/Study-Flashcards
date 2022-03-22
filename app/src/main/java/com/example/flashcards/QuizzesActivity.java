@@ -42,38 +42,6 @@ public class QuizzesActivity extends AppCompatActivity {
 
         updateUI();
 
-//        /******************************Testing for getAllQuizzes and getAllQuizWithTopic **************/
-//        String value = "AllFlashCard: ";
-//        dbHelper = new DataBaseHelper(this);
-//        int question_no = 4;
-//        QuizModel quizModel = new QuizModel();
-//        quizzes = dbHelper.getAllQuizzesWithTopicNotAttempted("DIVISION");
-//
-//        if(quizzes.size() >= question_no){
-//            for(int i = 0;i<question_no;i++) {
-//                quizModel = quizzes.get(i);
-//                Log.d("Question "+i, quizModel.getQuestions().getQuestion());
-//            }
-//        }else{
-//            Log.d("Question ", "Congrats you have attempted all quizzes");
-//        }
-//
-//        for (QuizModel quiz : quizzes) {
-//            Log.d("Quiz Value", quiz.toString());
-//            value += quiz.toString();
-//        }
-//
-//        //getAllQuizzesWithTopic : Possible values are "ADDITION", "SUBTRACTION", "MULTIPLICATION", "DIVISION"
-//        quizzes = dbHelper.getAllQuizzesWithTopic("MULTIPLICATION");
-//        value += " \n Topic: MULTIPLICATION: ";
-//        for (QuizModel quiz : quizzes) {
-//            Log.d("Quiz Value", quiz.toString());
-//            value += quiz.toString();
-//        }
-//        Toast.makeText(QuizzesActivity.this,value,Toast.LENGTH_SHORT).show();
-//        /******************************************  END  *************************************/
-
-
     }
 
     public void launchHome(View v){
@@ -100,6 +68,7 @@ public class QuizzesActivity extends AppCompatActivity {
         if (isInputValid(input)) {
             if (input.equalsIgnoreCase(currentCard.getQuestions().getAnswer())) {
                 if (currentCardIndex + 1 < quizzes.size()) {
+                    Log.d("Card Index", "Card Index = "+currentCardIndex);
                     currentCardIndex += 1;
                     updateUI();
                 } else {
@@ -133,6 +102,14 @@ public class QuizzesActivity extends AppCompatActivity {
 
 
     private void segueHome() {
+        //If user has attended all 5 questions in a section, then Mastery status will be added 20 more points.
+        // For mastery maximum value will be 100.
+        if(currentCardIndex == 4){
+            int status = dbHelper.getMastery();
+            if(status <= 80) {
+                dbHelper.updateMastery(status + 20);
+            }
+        }
         Intent i = new Intent(this, HomeActivity.class);
         startActivity(i);
     }

@@ -36,27 +36,6 @@ public class PracticeActivity extends AppCompatActivity {
         topicView.setText(topic);
 
         updateUI();
-
-//        /******************************Testing for getAllFlashCard and getAllFlashCardWithTopic **************/
-//        String value = "AllFlashCard: ";
-//        dbHelper = new DataBaseHelper(this);
-//
-//        practiceCards = dbHelper.getAllFlashCards();
-//        for (FlashCardModel flashCard : practiceCards) {
-//            Log.d("Flash Card Value", flashCard.toString());
-//            value += flashCard.toString();
-//        }
-//
-//        //getAllFlashCardWithTopic : Possible values are "ADDITION", "SUBTRACTION", "MULTIPLICATION", "DIVISION"
-//        practiceCards = dbHelper.getAllFlashCardsWithTopic("ADDITION");
-//        value += " \n Topic: ADDITION: ";
-//        for (FlashCardModel flashCard : practiceCards) {
-//            Log.d("Flash Card Value", flashCard.toString());
-//            value += flashCard.toString();
-//        }
-//        Toast.makeText(PracticeActivity.this,value,Toast.LENGTH_SHORT).show();
-//        /******************************************  END  *************************************/
-
     }
 
     public void launchHome(View v){
@@ -116,6 +95,14 @@ public class PracticeActivity extends AppCompatActivity {
     }
 
     private void segueHome() {
+        //If user has attended all 5 questions in a section, then Mastery status will be added 20 more points.
+        // For mastery maximum value will be 100.
+        if(currentCardIndex == 4){
+            int status = dbHelper.getMastery();
+            if(status <= 80) {
+                dbHelper.updateMastery(status + 20);
+            }
+        }
         // Adding sound
         final MediaPlayer mediaPlayer = MediaPlayer.create(this,R.raw.btn_sound);
         mediaPlayer.start();

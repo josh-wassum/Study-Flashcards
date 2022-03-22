@@ -25,6 +25,7 @@ public class MasteryActivity extends AppCompatActivity {
         int value = dbHelper.getMastery();
         Log.d("Flash Card Value", "Mastery Value "+value);
         Toast.makeText(MasteryActivity.this,"Mastery value = "+value,Toast.LENGTH_SHORT).show();
+        updateProgress();
     }
 
     public void launchHome(View v){
@@ -34,7 +35,7 @@ public class MasteryActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void updateProgress(View v){
+    public void updateProgress(){
         // updates the progress graphics to reflect the entered progress. This will be moved to the
         // Oncreate function and only need to run once when we are able to have the mastery passed
         // into this activity
