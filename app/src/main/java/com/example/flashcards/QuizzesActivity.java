@@ -22,6 +22,7 @@ public class QuizzesActivity extends AppCompatActivity {
 
     public DataBaseHelper dbHelper;
     public List<QuizModel> quizzes = new ArrayList<>();
+    public List<FlashCardModel> flashCards = new ArrayList<>();
     private int currentCardIndex = 0;
 
     @Override
@@ -33,14 +34,26 @@ public class QuizzesActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String topic = intent.getStringExtra("topic");
-        quizzes = dbHelper.getAllQuizzesWithTopic(topic);
 
-        TextView topicView = findViewById(R.id.quiz_topic);
-        topicView.setText(topic);
-        ProgressBar progress = findViewById(R.id.quiz_progress_bar);
-        progress.setMax(quizzes.size());
+        // flashCards
+        flashCards = dbHelper.getAllFlashCardsWithTopicNotAttempted(topic);
 
-        updateUI();
+        if(flashCards.size() == 0){
+
+            quizzes = dbHelper.getAllQuizzesWithTopic(topic);
+
+            TextView topicView = findViewById(R.id.quiz_topic);
+            topicView.setText(topic);
+            ProgressBar progress = findViewById(R.id.quiz_progress_bar);
+            progress.setMax(quizzes.size());
+
+            updateUI();
+
+        }else{
+            // Here you can add the logic for deactivating the buttons of topics
+            Toast.makeText(QuizzesActivity.this, "Please Attempt the FlashCard for the topic "+topic ,Toast.LENGTH_SHORT).show();
+        }
+
 
     }
 

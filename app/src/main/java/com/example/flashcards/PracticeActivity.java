@@ -62,6 +62,8 @@ public class PracticeActivity extends AppCompatActivity {
         if (isInputValid(input)) {
             //answer.setText(currentCard.getFlashCardAnswer());
             if (input.equalsIgnoreCase(currentCard.getQuestions().getAnswer())) {
+                dbHelper.updateFlashCardAttempted(currentCard.getId(), true);
+                Log.d("Update FlashCard", "Flash card with id "+currentCard.getId()+" has change to Attempted");
                 if (currentCardIndex + 1 < practiceCards.size()) {
                     currentCardIndex += 1;
                     updateUI();
