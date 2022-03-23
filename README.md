@@ -1,28 +1,28 @@
 # Overview
-
-{Important!  Do not say in this section that this is college assignment.}
-
-{Provide a description of your team project.  Describe how to use the software.}
+Math to the moon is K-12 proof of concept flashcard android application. The app is designed to make practicing foundational arithimetic skills fun, engaging, and easy to manage on your own at any age. Simply begin by opening the app, pick the practice button, and select a topic. After practicing you can prove your mastery with the quiz functionality. Provided you pass the quiz, you'll be able to see your progess as you "math to the moon" on the mastery screen. Blast off!
 
 # Development Environment
 
-{Describe the tools that you used to develop the software}
+We used Github, Android Studio, SQL-Lite and the Android SDK to develop "Math to the Moon".
 
-{Describe the programming language that you used and any libraries.}
+The Java programming language was integral to the development of the project. We used it at every stage of development. Kotlin was considered, but familiarity and the widespread applicability of Java won out.
 
 # Collaborators
 
-{Provide a list of everyone on your team}
+* [Josh Wassum](https://github.com/josh-wassum)
+* [Tyson Freeze](https://github.com/Minimistro32)
+* [Om Abney](https://github.com/omabney)
+* [Braxton Meyer](https://github.com/BMeyer-git)
+* [Eric Mamani](https://github.com/ericmamaniramirez13)
 
 # Useful Websites
 
-{Make a list of websites that you found helpful in this project}
-* [Web Site Name](http://url.link.goes.here)
-* [Web Site Name](http://url.link.goes.here)
+* [Android Studio](https://developer.android.com/studio/)
+* [Android Project Structure](https://www.youtube.com/watch?v=h3ylwK6MINI)
+* [How to Make an Android App for Beginners](https://www.youtube.com/watch?v=EOfCEhWq8sg)
 
 # Future Work
 
-{Make a list of things that you need to fix, improve, and add in the future.}
-* Item 1
-* Item 2
-* Item 3
+* Utilize fragments and implement a tab bar controller.
+* Refactor every screen to utilize responsive layout designs.
+* Improve user experience with haptics, additional graphics, and an onboarding flow.
