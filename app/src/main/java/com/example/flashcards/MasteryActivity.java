@@ -29,6 +29,7 @@ public class MasteryActivity extends AppCompatActivity {
         int value = dbHelper.getMastery();
         Log.d("Flash Card Value", "Mastery Value " + value);
         Toast.makeText(MasteryActivity.this, "Mastery value = " + value, Toast.LENGTH_SHORT).show();
+
         updateProgress();
     }
 

@@ -83,7 +83,7 @@ public class PracticeActivity extends AppCompatActivity {
         TextView question = findViewById(R.id.practice_question);
         ProgressBar prac_progress = findViewById(R.id.practice_progress_bar);
 
-        //Setting up progress bar to start from 0
+        //Update progress bar progress
         prac_progress.setProgress(currentCardIndex);
 
         total.setText(String.format("Question %d / %d", currentCardIndex + 1, practiceCards.size()));

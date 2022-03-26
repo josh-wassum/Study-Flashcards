@@ -29,12 +29,13 @@ public class QuizzesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quizzes);
 
+        //Load quiz data using topic
         dbHelper = new DataBaseHelper(this);
-
         Intent intent = getIntent();
         String topic = intent.getStringExtra("topic");
         quizzes = dbHelper.getAllQuizzesWithTopic(topic);
 
+        //Set progress bar size and topic text
         TextView topicView = findViewById(R.id.quiz_topic);
         topicView.setText(topic);
         ProgressBar progress = findViewById(R.id.quiz_progress_bar);
@@ -66,9 +67,9 @@ public class QuizzesActivity extends AppCompatActivity {
         TextView answer = findViewById(R.id.quiz_answer);
         String input = answer.getText().toString();
         if (isInputValid(input)) {
-            if (input.equalsIgnoreCase(currentCard.getQuestions().getAnswer())) {
-                if (currentCardIndex + 1 < quizzes.size()) {
-                    Log.d("Card Index", "Card Index = "+currentCardIndex);
+            if (input.equalsIgnoreCase(currentCard.getQuestions().getAnswer())) { // if the answer is correct
+                if (currentCardIndex + 1 < quizzes.size()) { //and there is another question
+                    //move to the next card and update the UI
                     currentCardIndex += 1;
                     updateUI();
                 } else {
@@ -77,23 +78,17 @@ public class QuizzesActivity extends AppCompatActivity {
             }
         }
     }
-    public int current_progress = 0;
-    //Change value to max number of questions
-    public int max_num_questions = 5;
+
     private void updateUI() {
         QuizModel currentCard = quizzes.get(currentCardIndex);
         ProgressBar progress = findViewById(R.id.quiz_progress_bar);
         TextView question = findViewById(R.id.quiz_question);
 
-        //Setting up progress bar to start from 0
-        progress.setProgress(current_progress);
+        //Update progress bar progress
+        progress.setProgress(currentCardIndex);
 
-        //Setting up progress bar to have a max of total number of questions
-        progress.setMax(max_num_questions);
+        //Set question text
         question.setText(currentCard.getQuestions().getQuestion());
-
-        //Adding 1 each time this class is called so the progress bar increases each time
-        current_progress ++;
     }
 
 //        final MediaPlayer mediaPlayer = MediaPlayer.create(this,R.raw.btn_sound);
