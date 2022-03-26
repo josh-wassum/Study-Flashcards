@@ -26,14 +26,19 @@ public class PracticeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_practice);
 
+        //load Flashcards by topic
         dbHelper = new DataBaseHelper(this);
-
         Intent intent = getIntent();
         String topic = intent.getStringExtra("topic");
         practiceCards = dbHelper.getAllFlashCardsWithTopic(topic);
 
+        //Update topic TextView
         TextView topicView = findViewById(R.id.practice_topic);
         topicView.setText(topic);
+
+        //Setting up progress bar to have a max of total number of questions
+        ProgressBar prac_progress = findViewById(R.id.practice_progress_bar);
+        prac_progress.setMax(practiceCards.size());
 
         updateUI();
     }
@@ -72,9 +77,6 @@ public class PracticeActivity extends AppCompatActivity {
         }
     }
 
-    public int current_progress = 0;
-    //Change value to max number of questions
-    public int max_num_questions = 5;
     private void updateUI() {
         FlashCardModel currentCard = practiceCards.get(currentCardIndex);
         TextView total = findViewById(R.id.practice_score);
@@ -82,16 +84,10 @@ public class PracticeActivity extends AppCompatActivity {
         ProgressBar prac_progress = findViewById(R.id.practice_progress_bar);
 
         //Setting up progress bar to start from 0
-        prac_progress.setProgress(current_progress);
-
-        //Setting up progress bar to have a max of total number of questions
-        prac_progress.setMax(max_num_questions);
+        prac_progress.setProgress(currentCardIndex);
 
         total.setText(String.format("Question %d / %d", currentCardIndex + 1, practiceCards.size()));
         question.setText(currentCard.getQuestions().getQuestion());
-
-        //Adding 1 each time this class is called so the progress bar increases each time
-        current_progress ++;
     }
 
     private void segueHome() {
