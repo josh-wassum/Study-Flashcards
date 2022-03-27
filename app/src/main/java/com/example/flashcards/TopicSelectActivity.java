@@ -7,9 +7,15 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.flashcards.library.DataBaseHelper;
+import com.example.flashcards.models.FlashCardModel;
+import com.example.flashcards.models.QuizModel;
+
+import java.util.List;
+import java.util.Locale;
 
 public class TopicSelectActivity extends AppCompatActivity {
 
@@ -22,14 +28,82 @@ public class TopicSelectActivity extends AppCompatActivity {
 
         dbHelper = new DataBaseHelper(this);
         int value = dbHelper.getMastery();
-        Log.d("Flash Card Value", "Mastery Value "+value);
-        Toast.makeText(TopicSelectActivity.this,"Mastery value = "+value,Toast.LENGTH_SHORT).show();
+        Log.d("Flash Card Value", "Mastery Value " + value);
+        Toast.makeText(TopicSelectActivity.this, "Mastery value = " + value, Toast.LENGTH_SHORT).show();
 
         // if mastery_status == true where mastery_id = previous quiz/practice topic || topic = addition and mode = practice
         // android:setClickable(true)
         // else
         // false
+        String[] topics = {"ADDITION", "SUBTRACTION", "MULTIPLICATION", "DIVISION"};
+        Intent intent = getIntent();
+        String mode = intent.getStringExtra("mode");
+
+        // Activating buttons based on completion of previous items
+        if (mode.equals("practice")) {
+
+
+            for (String topic : topics) {
+
+                // flashCards
+                List<QuizModel> quizzes = dbHelper.getAllQuizzesWithTopicNotAttempted(topic);
+
+                Button additionButton = findViewById(R.id.topic_addition_btn);
+                additionButton.setEnabled(true);
+                // Confirming completion of previous quiz for topic
+                if (quizzes.size() == 0) {
+
+                    // Comparing topic to activate button
+                    switch (topic) {
+                        case "SUBTRACTION":
+                            Button subtractionButton = findViewById(R.id.topic_subtraction_btn);
+                            subtractionButton.setEnabled(true);
+                            break;
+                        case "MULTIPLICATION":
+                            Button multiplicationButton = findViewById(R.id.topic_multiplication_btn);
+                            multiplicationButton.setEnabled(true);
+                            break;
+                        case "DIVISION":
+                            Button divisionButton = findViewById(R.id.topic_division_btn);
+                            divisionButton.setEnabled(true);
+                            break;
+                    }
+                }
+            }
+        }
+
+        // Confirming completion of previous practice for topic
+        else {
+            for (String topic : topics) {
+                // flashCards
+                List<FlashCardModel> flashCards = dbHelper.getAllFlashCardsWithTopicNotAttempted(topic);
+                // Confirming completion of previous quiz for topic
+                if (flashCards.size() == 0) {
+
+                    // Comparing topic to activate button
+                    switch (topic) {
+                        case "ADDITION":
+                            Button additionQuizButton = findViewById(R.id.topic_addition_btn);
+                            additionQuizButton.setEnabled(true);
+                            break;
+                        case "SUBTRACTION":
+                            Button subtractionButton = findViewById(R.id.topic_subtraction_btn);
+                            subtractionButton.setEnabled(true);
+                            break;
+                        case "MULTIPLICATION":
+                            Button multiplicationButton = findViewById(R.id.topic_multiplication_btn);
+                            multiplicationButton.setEnabled(true);
+                            break;
+                        case "DIVISION":
+                            Button divisionButton = findViewById(R.id.topic_division_btn);
+                            divisionButton.setEnabled(true);
+                            break;
+                    }
+                }
+            }
+        }
     }
+
 
     public void launchActivity(View v){
         // Switches to the mastery or practice screen via a button
