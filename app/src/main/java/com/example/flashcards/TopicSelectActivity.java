@@ -55,15 +55,15 @@ public class TopicSelectActivity extends AppCompatActivity {
 
                     // Comparing topic to activate button
                     switch (topic) {
-                        case "SUBTRACTION":
+                        case "ADDITION":
                             Button subtractionButton = findViewById(R.id.topic_subtraction_btn);
                             subtractionButton.setEnabled(true);
                             break;
-                        case "MULTIPLICATION":
+                        case "SUBTRACTION":
                             Button multiplicationButton = findViewById(R.id.topic_multiplication_btn);
                             multiplicationButton.setEnabled(true);
                             break;
-                        case "DIVISION":
+                        case "MULTIPLICATION":
                             Button divisionButton = findViewById(R.id.topic_division_btn);
                             divisionButton.setEnabled(true);
                             break;
