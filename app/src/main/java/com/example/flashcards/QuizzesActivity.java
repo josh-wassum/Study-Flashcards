@@ -87,6 +87,7 @@ public class QuizzesActivity extends AppCompatActivity {
         TextView answer = findViewById(R.id.quiz_answer);
         String input = answer.getText().toString();
         if (isInputValid(input)) {
+            dbHelper.updateQuizAttempted(currentCard.getId(), true);
             if (input.equalsIgnoreCase(currentCard.getQuestions().getAnswer())) { // if the answer is correct
                 if (currentCardIndex + 1 < quizzes.size()) { //and there is another question
                     //move to the next card and update the UI
